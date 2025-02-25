@@ -20,9 +20,10 @@ References
 from __future__ import annotations
 
 from dataclasses import dataclass
-
+import colour
 import cv2
 import numpy as np
+import matplotlib.pyplot as plt
 from colour.hints import (
     Any,
     ArrayLike,
@@ -567,6 +568,40 @@ def detect_colour_checkers_segmentation(
     segmentation_colour_checkers_data = segmenter(
         image, additional_data=True, **{**segmenter_kwargs, **settings}
     )
+
+    # colour_checkers_data2 = []
+    # for quadrilateral in segmentation_colour_checkers_data.rectangles:
+    #     colour_checkers_data2.append(
+    #         sample_colour_checker(image, quadrilateral, rectangle, samples, **settings)
+    #     )
+
+    # REFERENCE_COLOUR_CHECKER = colour.CCS_COLOURCHECKERS[
+    #     'ColorChecker24 - After November 2014']
+
+    # REFERENCE_SWATCHES = colour.XYZ_to_RGB(
+    #         colour.xyY_to_XYZ(list(REFERENCE_COLOUR_CHECKER.data.values())),
+    #         'sRGB', REFERENCE_COLOUR_CHECKER.illuminant)
+
+    # imageplot = colour_checkers_data2[0].colour_checker
+    # masksplot = colour_checkers_data2[0].swatch_masks
+
+    # for m in range(np.shape(masksplot)[0]):
+    #     maskplot = masksplot[m]
+    #     i=imageplot[maskplot[0] : maskplot[1], maskplot[2] : maskplot[3], ...]
+    #     colors = ("red", "green", "blue")
+    #     fig, ax = plt.subplots()
+    #     ax.set_xlim([0.0, 1.0])
+    #     for channel_id, color in enumerate(colors):
+    #         histogram, bin_edges = np.histogram(
+    #                 i[:, :, channel_id], bins=256, range=(0, 1)
+    #             )
+    #         ax.plot(bin_edges[0:-1], histogram, color=color)
+    #         ax.axvline(REFERENCE_SWATCHES[m, channel_id], color=color)
+    #     ax.set_title("Color Histogram")
+    #     ax.set_xlabel("Color value")
+    #     ax.set_ylabel("Pixel count")
+    #     plt.savefig("output/hist_{}.png".format(m))
+    # plt.close('all')
 
     colour_checkers_data = []
     for quadrilateral in segmentation_colour_checkers_data.rectangles:

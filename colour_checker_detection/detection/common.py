@@ -323,10 +323,32 @@ def swatch_colours(image: ArrayLike, masks: ArrayLike) -> NDArrayFloat:
            [...0.6...,...0.7857...,...0...],
            [...0.9...,...0.7857...,...0...]]...)
     """
-
+    import colour
+    import matplotlib.pyplot as plt
     image = as_array(image)
     masks = as_int32_array(masks)
+    # for mask in masks:
+    #     i=image[mask[0] : mask[1], mask[2] : mask[3], ...]
+    #     colour.plotting.plot_image(
+    #             colour.cctf_encoding(
+    #                 np.clip(i)))
 
+    #     colors = ("red", "green", "blue")
+    #     fig, ax = plt.subplots()
+    #     ax.set_xlim([0.0, 1.0])
+    #     for channel_id, color in enumerate(colors):
+    #         histogram, bin_edges = np.histogram(
+    #             i[:, :, channel_id], bins=256, range=(0, 1)
+    #         )
+    #         ax.plot(bin_edges[0:-1], histogram, color=color)
+
+    #     ax.set_title("Color Histogram")
+    #     ax.set_xlabel("Color value")
+    #     ax.set_ylabel("Pixel count")
+    #     plt.savefig("output/hist.png")
+        #cv2.calchist([imageObject], [channelValue], maschera, [histSize], [low,high])
+        # blue_color = cv2.calcHist([i], [0], None, [256], [0, 1]) 
+    
     return as_float32_array(
         [
             np.mean(
